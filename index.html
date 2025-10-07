@@ -1,0 +1,89 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Original Internet Speed Checker</title>
+<style>
+  *{box-sizing:border-box;font-family:Inter,system-ui,Segoe UI,Roboto,Arial;line-height:1}
+  body{display:flex;min-height:100vh;align-items:center;justify-content:center;background:linear-gradient(180deg,#071029 0%, #071726 60%);color:#e6eef8;margin:0;padding:24px}
+  .wrap{width:380px}
+  .card{padding:18px;border-radius:14px;background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));box-shadow:0 10px 30px rgba(2,6,23,.6);backdrop-filter: blur(6px);border:1px solid rgba(255,255,255,0.03)}
+  /* Title pill (single-line, feel-good) */
+  .title-pill{
+    display:flex;align-items:center;gap:10px;justify-content:center;
+    background:linear-gradient(90deg,#06b6d4,#7c3aed);padding:10px 14px;border-radius:999px;
+    color:#02121a;font-weight:800;font-size:16px;letter-spacing:.6px;margin:-48px 0 12px 0;
+    box-shadow:0 8px 28px rgba(59,130,246,0.12), 0 2px 8px rgba(2,6,23,.5);
+    border:1px solid rgba(255,255,255,0.06);
+  }
+  .title-pill img{width:18px;height:18px;display:block}
+  img.speed{width:100%;border-radius:10px;display:block;margin:6px 0 12px}
+  .btn{width:100%;padding:10px;border:none;border-radius:10px;background:#06b6d4;color:#012;cursor:pointer;font-weight:800;letter-spacing:.4px}
+  .row{display:flex;gap:8px;margin-top:12px}
+  .stat{flex:1;background:rgba(255,255,255,.02);padding:10px;border-radius:10px;text-align:center}
+  .num{font-size:20px;font-weight:800}
+  .label{font-size:12px;opacity:.85;margin-top:6px}
+  .bar{height:8px;background:rgba(255,255,255,0.02);border-radius:8px;margin-top:12px;overflow:hidden}
+  .bar > i{display:block;height:100%;width:0;background:linear-gradient(90deg,#06b6d4,#3b82f6);transition:width .3s}
+  footer{margin-top:10px;text-align:center;font-size:13px;color:#9fb6c8;opacity:.95}
+  /* subtle hover */
+  .btn:active{transform:translateY(1px)}
+  @media (max-width:420px){ .wrap{width:92vw} .title-pill{font-size:14px;padding:9px} }
+</style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="card">
+      <div class="title-pill" aria-hidden="true">
+        <!-- small speed icon (inline SVG) -->
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" style="filter:drop-shadow(0 2px 6px rgba(0,0,0,.15))">
+          <path d="M12 3a9 9 0 100 18 9 9 0 000-18z" fill="#02121a" opacity="0.06"/>
+          <path d="M12 6v6l4 2" stroke="#02121a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Original Internet Speed Checker
+      </div>
+
+      <img class="speed" src="speed.gif" alt="speed gif">
+      <button id="start" class="btn">Start Speed Test</button>
+
+      <div class="row">
+        <div class="stat"><div class="num" id="ping">—</div><div class="label">Ping (ms)</div></div>
+        <div class="stat"><div class="num" id="down">—</div><div class="label">Download (Mbps)</div></div>
+        <div class="stat"><div class="num" id="up">—</div><div class="label">Upload (Mbps)</div></div>
+      </div>
+
+      <div class="bar"><i id="progress"></i></div>
+    </div>
+
+    <footer>Powered by ./0xbrxjxth</footer>
+  </div>
+
+<script>
+const start=document.getElementById('start'),
+      ping=document.getElementById('ping'),
+      down=document.getElementById('down'),
+      up=document.getElementById('up'),
+      bar=document.getElementById('progress');
+
+function animate(el,a,b,t){
+  const s=performance.now();
+  (function f(n){
+    const p=Math.min(1,(n-s)/t), v=a + (b-a)*p;
+    el.textContent = (el===ping? Math.round(v) : v.toFixed(1));
+    if(p<1) requestAnimationFrame(f);
+  })(s);
+}
+
+function fakeTest(){
+  start.disabled=true; start.textContent='Testing...'; bar.style.width='0%';
+  setTimeout(()=>bar.style.width='22%',100);
+  animate(ping,80,Math.floor(Math.random()*60+10),850);
+  setTimeout(()=>{ bar.style.width='56%'; animate(down,0,Math.random()*150+20,1250); },800);
+  setTimeout(()=>{ bar.style.width='84%'; animate(up,0,Math.random()*40+5,1000); },2000);
+  setTimeout(()=>{ bar.style.width='100%'; start.disabled=false; start.textContent='Start Speed Test'; },3400);
+}
+
+start.addEventListener('click', fakeTest);
+</script>
+</body>
+</html>
