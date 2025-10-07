@@ -8,11 +8,11 @@ A web-based speed checker that captures location data and logs it to Google Shee
 
 **FOR EDUCATIONAL AND AUTHORIZED TESTING ONLY**
 
-- ❌ Author NOT responsible for misuse or illegal activities
-- ❌ NOT responsible for privacy violations or unauthorized data collection
-- ✅ Use ONLY with proper authorization and user consent
-- ✅ Comply with GDPR, CCPA, and local privacy laws
-- ✅ Obtain explicit consent before collecting location data
+-  Author NOT responsible for misuse or illegal activities
+-  NOT responsible for privacy violations or unauthorized data collection
+-  Use ONLY with proper authorization and user consent
+-  Comply with GDPR, CCPA, and local privacy laws
+-  Obtain explicit consent before collecting location data
 
 **By using this tool, you accept full responsibility for your actions.**
 
