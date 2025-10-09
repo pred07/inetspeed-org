@@ -1,4 +1,4 @@
-# Internet Speed Checker with Location Tracking
+# Internet Speed Checker with Location Tracking!
 
 A web-based speed checker that captures location data and logs it to Google Sheets.
 
